@@ -1,7 +1,7 @@
 import numpy as np
 from scipy import io
 from scipy import linalg
-from enthought.mayavi import mlab
+from mayavi import mlab
 from mesh import Mesh
 
 cortex = Mesh("cortex.tri")

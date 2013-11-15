@@ -5,7 +5,7 @@ print __doc__
 
 from mesh import Mesh
 import numpy as np
-from enthought.mayavi import mlab
+from mayavi import mlab
 
 # define some nice colors for the surfaces
 head_col = (0.95, 0.83, 0.83) # light pink
@@ -36,3 +36,4 @@ mlab.quiver3d(squids[:,0], squids[:,1], squids[:,2],
               -squids[:,3], -squids[:,4], -squids[:,5],
               opacity=0.5, scale_factor=10, mode='cone')
 
+mlab.show()

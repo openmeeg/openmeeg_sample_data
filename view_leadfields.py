@@ -3,7 +3,7 @@
 
 import numpy as np
 import scipy.io as io
-from enthought.mayavi import mlab
+from mayavi import mlab
 from mesh import Mesh
 
 # Load data
