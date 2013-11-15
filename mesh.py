@@ -21,7 +21,7 @@ class Mesh():
 
     To plot the surface of the corresponding object, call the function
     'self.plot(**kwarg)'. The kwarg options are the one from
-    enthought.mayavi.mlab.triangular_mesh
+    mayavi.mlab.triangular_mesh
 
     '''
     def __init__(self, fname=None):
@@ -57,7 +57,7 @@ class Mesh():
     def plot(self,**kwarg):
         '''Plot mesh with Mayavi
         '''
-        from enthought.mayavi import mlab
+        from mayavi import mlab
         f = mlab.triangular_mesh(self.points[:,0],self.points[:,1],self.points[:,2],self.faces, **kwarg)
         return f
 
