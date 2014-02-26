@@ -1,5 +1,4 @@
 Demo scripts to compute leadfields with OpenMEEG
-================================================
 
 - Supports EEG, MEG, EIT and Internal potential leadfields
 
@@ -7,7 +6,7 @@ This folder contains a sample realistic dataset for EEG, MEG, EIT
 and internal potential forward modeling.
 
 The head model is a 3 layers model with 3 nested meshes:
-brain.tri, skull.tri and head.tri
+brain.vtk, skull.vtk and head.vtk
 
 To run the computation you can use the scripts:
 
@@ -24,7 +23,7 @@ Or using Python:
 	python compute_leadfields.py
 
 
-The leadfields computed are stored in :
+The leadfields computed are stored in (matlab format):
 
     eeg_leadfield.mat (for EEG)
 
