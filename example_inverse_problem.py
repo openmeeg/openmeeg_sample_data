@@ -5,7 +5,7 @@ from scipy import linalg
 from mayavi import mlab
 from mesh import Mesh
 
-cortex = Mesh("model/cortex.vtk")
+cortex = Mesh("model/cortex.tri")
 electrodes = np.loadtxt('model/eeg_channels_locations.txt')
 squids = np.loadtxt('model/meg_channels_locations.squids')
 
@@ -29,7 +29,7 @@ m = np.dot(G_eeg, x_simu)
 m += 1e-8 * np.random.randn(*m.shape)
 
 # show topography
-electrodes_mesh = Mesh("model/eeg_channels_mesh.vtk")
+electrodes_mesh = Mesh("model/eeg_channels_mesh.tri")
 
 mlab.figure(1)
 mlab.clf()

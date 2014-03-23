@@ -7,7 +7,7 @@ from mayavi import mlab
 from mesh import Mesh
 
 # Load data
-cortex = Mesh("model/cortex.vtk")
+cortex = Mesh("model/cortex.tri")
 eeg_electrodes = np.loadtxt('model/eeg_channels_locations.txt')
 eit_electrodes = np.loadtxt('model/eit_locations.txt')
 ecog_electrodes = np.loadtxt('model/ecog_electrodes_locations.txt')
@@ -79,7 +79,7 @@ j_eit[idx_out] = -1 # -1 current leaves in idx_out electrode
 v_eit = np.dot(G_eit, j_eit)
 
 # View results
-electrodes_mesh = Mesh("model/eeg_channels_mesh.vtk")
+electrodes_mesh = Mesh("model/eeg_channels_mesh.tri")
 electrodes_mesh.plot(scalars=v_eit)
 
 mlab.points3d(eeg_electrodes[[idx_in, idx_out], 0],

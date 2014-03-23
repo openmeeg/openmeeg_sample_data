@@ -13,10 +13,10 @@ skull_col = (0.91, 0.89, 0.67)
 brain_col = (0.67, 0.89, 0.91) # light blue
 cortex_col = (0.68, 0.68, 0.68) # grey
 
-head = Mesh("model/head.vtk")
-brain = Mesh("model/skull.vtk")
-skull = Mesh("model/brain.vtk")
-cortex = Mesh("model/cortex.vtk")
+head = Mesh("model/head.tri")
+brain = Mesh("model/skull.tri")
+skull = Mesh("model/brain.tri")
+cortex = Mesh("model/cortex.tri")
 
 mlab.clf()
 
