@@ -4,6 +4,9 @@
 Created on Tues. January 14 2014
 
 @author: - E. Olivi
+This work has been done for the
+CNRS, Laboratoire de Neurosciences Cognitives, UMR 7291, 13331, Marseille, France
+under the supervision of Boris Burle
 """
 
 import sys
