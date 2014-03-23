@@ -1,3 +1,22 @@
+These examples contain mainly two different views on how to use OpenMEEG with scripting languages
+==================================================================================================
+
+I) Computing/viewing EEG/MEG/EIT leadfields from bash, DOS, or python 
+--
+it concerns files compute_leadfields.* view_leadfields.* mesh.py example_inverse_problem.py view_head_model.py.
+The viewer works with mayavi.
+
+II) Compute and apply a corticial mapping, TDCS (Transcranial direct-current stimulation)
+--
+it concerns files corticalmapping*.py tdcs.py canonical/* canonical_real/*
+and uses python tools for viewing: om_display.py, om_compare.py, om_basics.py.
+The viewer works on vtk.
+
+Here are more details:
+
+I) Computing/viewing EEG/MEG/EIT leadfields
+-------------------------------------------
+
 Demo scripts to compute leadfields with OpenMEEG
 
 - Supports EEG, MEG, EIT and Internal potential leadfields
@@ -6,7 +25,7 @@ This folder contains a sample realistic dataset for EEG, MEG, EIT
 and internal potential forward modeling.
 
 The head model is a 3 layers model with 3 nested meshes:
-brain.vtk, skull.vtk and head.vtk
+brain.tri, skull.tri and head.tri
 
 To run the computation you can use the scripts:
 
@@ -48,6 +67,24 @@ On a recent workstation the computation takes about
 	 + 84.84 s	     4.17 s	  17.65 s  om_gain -MEG
                              173.49 s  om_assemble -EITSM
                                1.15 s  om_gain -EEG
+
+
+II) Compute and apply a corticial mapping, TDCS
+-----------------------------------------------
+-canonical is a model generated remeshing the MNI template from SPM. It uses conductivities, 1., 0.0125, 1. and has a few defined source terms (8) with intensities roughly at the same scale as the model. 128 electrodes.
+-canonical_real is the same model with real potentials and sensors (64) locations.
+
+commands:
+---------
+for cortical mapping:
+> python corticalmapping.py canonical_real
+
+for TDCS:
+> python tdcs.py canonical
+
+-------------------------------------------------------------------------
+
+
 
 If you meet some difficulties running this example please contact:
 
