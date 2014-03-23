@@ -9,6 +9,9 @@ calling the OpenMEEG class CorticalMat.
 There is also an alternative solver CorticalMat2.
 
 @author: - E. Olivi
+This work has been done for the
+CNRS, Laboratoire de Neurosciences Cognitives, UMR 7291, 13331, Marseille, France
+under the supervision of Boris Burle
 """
 
 import sys
