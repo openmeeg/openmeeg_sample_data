@@ -25,6 +25,14 @@ recompute_HMi = False
 
 def main(argv):
 
+    #create a dir for leadfields and tmp
+    if not op.exists("tmp"):
+        import os
+        os.mkdir('tmp')
+    if not op.exists("leadfields"):
+        import os
+        os.mkdir('leadfields')
+    
     filename = 'leadfields/HDTDCS_' + argv + '.vtp'
     filename_HMi = op.join('tmp', argv + '_HMi.mat')
 

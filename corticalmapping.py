@@ -43,6 +43,14 @@ recompute_Xo = False
 
 def main(argv):
 
+    #create a dir for leadfields and tmp
+    if not op.exists("tmp"):
+        import os
+        os.mkdir('tmp')
+    if not op.exists("leadfields"):
+        import os
+        os.mkdir('leadfields')
+    
     filename_O = 'leadfields/Original_' + argv + '.vtp'
     filename_R = 'leadfields/Reconstructed_' + argv + '.vtp'
 
