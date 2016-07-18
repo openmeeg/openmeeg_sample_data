@@ -14,14 +14,14 @@ from os import path as op
 
 ###############################################################################
 # Load data
-geom_file                    = 'model/head_model.geom'
-cond_file                    = 'model/head_model.cond'
-dipoles_file                 = 'model/cortex_dipoles.txt'
-squids_file                  = 'model/meg_channels_locations.squids'
-eeg_electrodes_file          = 'model/eeg_channels_locations.txt'
-eit_electrodes_file          = 'model/eit_locations.txt'
-ecog_electrodes_file         = 'model/ecog_electrodes_locations.txt'
-internal_electrodes_file     = 'model/internal_electrodes_locations.txt'
+geom_file                    = 'data/model/head_model.geom'
+cond_file                    = 'data/model/head_model.cond'
+dipoles_file                 = 'data/model/cortex_dipoles.txt'
+squids_file                  = 'data/model/meg_channels_locations.squids'
+eeg_electrodes_file          = 'data/model/eeg_channels_locations.txt'
+eit_electrodes_file          = 'data/model/eit_locations.txt'
+ecog_electrodes_file         = 'data/model/ecog_electrodes_locations.txt'
+internal_electrodes_file     = 'data/model/internal_electrodes_locations.txt'
 
 geom = om.Geometry(geom_file, cond_file)
 
@@ -31,7 +31,7 @@ meg_sensors = om.Sensors(squids_file)
 
 eeg_electrodes = om.Sensors(eeg_electrodes_file)
 
-eit_electrodes = om.Sensors(eit_electrodes_file, geom.outermost_interface())
+eit_electrodes = om.Sensors(eit_electrodes_file, geom)
 
 ecog_electrodes = om.Sensors(ecog_electrodes_file)
 

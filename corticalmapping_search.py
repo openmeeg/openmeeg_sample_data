@@ -23,13 +23,13 @@ recompute_Xo = False
 
 def main(argv):
 
-    filename_O = 'results/Original_' + argv + '.vtp'
-    filename_R = 'results/Reconstructed_' + argv + '.vtp'
+    filename_O = 'leadfields/Original_' + argv + '.vtp'
+    filename_R = 'leadfields/Reconstructed_' + argv + '.vtp'
     fig = plt.figure()
     ax = fig.add_subplot(111, projection = '3d')
     #ax.xaxis.set_scale('log');    ax.yaxis.set_scale('log');    ax.zaxis.set_scale('log')
-    N1 = 40
-    N2 = 1
+    N1 = 5 # choose sampling here
+    N2 = 1 # choose sampling here
     xs = np.random.rand(N1,N2)
     ys = np.random.rand(N1,N2)
     zs = np.random.rand(N1,N2)
@@ -42,8 +42,8 @@ def main(argv):
 
             if recompute:
                 # set matrices filenames
-                filename_Xo = op.join('matrices', argv + '_Xo.mat')
-                filename_CM = op.join('matrices', argv + '_CM.mat')
+                filename_Xo = op.join('tmp', argv + '_Xo.mat')
+                filename_CM = op.join('tmp', argv + '_CM.mat')
 
                 model = om_load_headmodel(argv)
                 # Compute the projector onto the sensors
@@ -54,8 +54,8 @@ def main(argv):
                     alpha = alphas[alph]
                     beta = betas[bet]
                     # CM, a matrix N_unknown X N_sensors
-                    #CM = om.CorticalMat(model['geometry'], M, 'Brain',3,alpha,beta,op.join('matrices',argv + '_P.mat'))
-                    CM = om.CorticalMat2(model['geometry'], M, 'Brain',3,alpha,op.join('matrices',argv + '_H.mat'))
+                    #CM = om.CorticalMat(model['geometry'], M, 'Brain',3,alpha,beta,op.join('tmp',argv + '_P.mat'))
+                    CM = om.CorticalMat2(model['geometry'], M, 'Brain',3,alpha,op.join('tmp',argv + '_H.mat'))
                     CM.save(str(filename_CM))
                 else:
                     CM = om.Matrix(str(filename_CM))

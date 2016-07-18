@@ -8,7 +8,7 @@ The viewer works with mayavi.
 
 II) Compute and apply a corticial mapping, TDCS (Transcranial direct-current stimulation)
 --
-it concerns files corticalmapping*.py tdcs.py canonical/* canonical_real/*
+it concerns files corticalmapping*.py tdcs.py data/canonical/* data/canonical_real/*
 and uses python tools for viewing: om_display.py, om_compare.py, om_basics.py.
 The viewer works on vtk.
 

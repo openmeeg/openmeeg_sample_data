@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-GEOMETRY=model/head_model.geom
-CONDUCTIVITIES=model/head_model.cond
-DIPOLES=model/cortex_dipoles.txt
-EEG_ELECTRODES=model/eeg_channels_locations.txt
-EIT_ELECTRODES=model/eit_locations.txt
-ECOG_ELECTRODES=model/ecog_electrodes_locations.txt
-SQUIDS=model/meg_channels_locations.squids
-INTERNAL_ELECTRODES=model/internal_electrodes_locations.txt
+GEOMETRY=data/model/head_model.geom
+CONDUCTIVITIES=data/model/head_model.cond
+DIPOLES=data/model/cortex_dipoles.txt
+EEG_ELECTRODES=data/model/eeg_channels_locations.txt
+EIT_ELECTRODES=data/model/eit_locations.txt
+ECOG_ELECTRODES=data/model/ecog_electrodes_locations.txt
+SQUIDS=data/model/meg_channels_locations.squids
+INTERNAL_ELECTRODES=data/model/internal_electrodes_locations.txt
 
 # Leadfields
 EEG_LEADFIELD=leadfields/eeg_leadfield.mat

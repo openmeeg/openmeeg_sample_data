@@ -13,10 +13,10 @@ skull_col = (0.91, 0.89, 0.67)
 brain_col = (0.67, 0.89, 0.91) # light blue
 cortex_col = (0.68, 0.68, 0.68) # grey
 
-head = Mesh("model/head.tri")
-brain = Mesh("model/skull.tri")
-skull = Mesh("model/brain.tri")
-cortex = Mesh("model/cortex.tri")
+head = Mesh("data/model/head.tri")
+brain = Mesh("data/model/skull.tri")
+skull = Mesh("data/model/brain.tri")
+cortex = Mesh("data/model/cortex.tri")
 
 mlab.clf()
 
@@ -26,11 +26,11 @@ brain.plot(color=brain_col, opacity=0.3)
 cortex.plot(color=cortex_col, opacity=1)
 
 # View EEG electrodes
-electrodes = np.loadtxt('model/eeg_channels_locations.txt')
+electrodes = np.loadtxt('data/model/eeg_channels_locations.txt')
 mlab.points3d(electrodes[:,0], electrodes[:,1], electrodes[:,2], opacity=0.5, scale_factor=6)
 
 # View MEG squids
-squids = np.loadtxt('model/meg_channels_locations.squids')
+squids = np.loadtxt('data/model/meg_channels_locations.squids')
 mlab.quiver3d(squids[:,0], squids[:,1], squids[:,2],
               -squids[:,3], -squids[:,4], -squids[:,5],
               opacity=0.5, scale_factor=10, mode='cone')

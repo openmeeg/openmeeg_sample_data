@@ -18,7 +18,7 @@ import sys
 import numpy as np
 import openmeeg as om
 from om_basics  import om_load_headmodel, om_forward_problem # openmeeg basics
-from om_display import om_display_vtp # visualiation with VTK
+from openmeeg_viz.om_display import om_display_vtp # visualiation with VTK
 from om_compare import om_compare_vtp # rdm and mag errors
 from os import path as op
 
@@ -29,7 +29,7 @@ alphas['Head2'] = 1.39e-7; betas['Head2'] = 1.e-5; gammas['Head2'] = 7.3
 alphas['Head3'] = 2.69e-6; betas['Head3'] = 5.18e-5; gammas['Head3'] = 4.76
 alphas['canonical'] = 1e-7; betas['canonical'] = 0.0413; gammas['canonical'] = 270.
 alphas['canonical_real'] = 1e-7; betas['canonical_real'] = 0.0413; gammas['canonical_real'] = 780.
-alphas['mni152'] = 1.3e-11;	betas['mni152'] = 1.69e-9; gammas['mni152'] = 10.37
+alphas['mni152'] = 1.3e-11; betas['mni152'] = 1.69e-9; gammas['mni152'] = 10.37
 alphas['mni152_real'] = 1.3e-11; betas['mni152_real'] = 1.69e-9; gammas['mni152_real'] = 10.37
 
 # adding a new model ?: put negative values for (alphas,betas), and the code
@@ -66,7 +66,7 @@ def main(argv):
         # 'Brain' is the name of the domain containing the sources (a-priori)
         if recompute_CM or not op.exists(filename_CM): 
             # CM, a matrix N_unknown X N_sensors
-            #CM = om.CorticalMat(model['geometry'], M, 'Brain',3, alphas[argv], betas[argv], op.join('matrices',argv + '_P.mat'))
+            #CM = om.CorticalMat(model['geometry'], M, 'Brain',3, alphas[argv], betas[argv], op.join('tmp',argv + '_P.mat'))
             CM = om.CorticalMat2(model['geometry'], M, 'Brain',3, gammas[argv], op.join('tmp',argv + '_H.mat'))
             CM.save(str(filename_CM))
         else:
