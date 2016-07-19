@@ -18,7 +18,7 @@ def rdmmag(X1,X2):
     print "  RDM = ",rdm, "\t  rMAG = ",rmag
     return rdm, rmag
 
-def om_compare_vtp(f1,f2):
+def compare_vtp(f1,f2):
     """
     This function computes the rdm and (relative)mag errors of VTK::vtp files generated with OpenMEEG.
     Such a file defines a polydata, containing points and triangles of several

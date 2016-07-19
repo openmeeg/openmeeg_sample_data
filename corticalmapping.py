@@ -17,9 +17,9 @@ under the supervision of Boris Burle
 import sys
 import numpy as np
 import openmeeg as om
-from om_basics  import om_load_headmodel, om_forward_problem # openmeeg basics
-from openmeeg_viz.om_display import om_display_vtp # visualiation with VTK
-from om_compare import om_compare_vtp # rdm and mag errors
+from om_basics  import load_headmodel, forward_problem # openmeeg basics
+from openmeeg_viz import display_vtp # visualiation with VTK
+from om_compare import compare_vtp # rdm and mag errors
 from os import path as op
 
 # These are good parameters for cortical mapping reconstruction
@@ -59,7 +59,7 @@ def main(argv):
         filename_Xo = op.join('tmp', argv + '_Xo.mat')
         filename_CM = op.join('tmp', argv + '_CM.mat')
 
-        model = om_load_headmodel(argv)
+        model = load_headmodel(argv)
         # Compute the projector onto the sensors
         M = om.Head2EEGMat(model['geometry'], model['sensors'])
 
@@ -77,7 +77,7 @@ def main(argv):
             # and then display both the reconstruction through the CorticalMapping
             # and the original
             if recompute_Xo or not op.exists(filename_Xo):
-                X_original = om_forward_problem(model)
+                X_original = forward_problem(model)
                 X_original.save(str(filename_Xo))
             else:
                 X_original = om.Matrix(str(filename_Xo))
@@ -85,7 +85,8 @@ def main(argv):
         elif model.has_key('potentials'):
             V_s = model['potentials']
         else:
-            print "Error: either specify input potentials or dipsources to simulate them."
+            print("Error: either specify input potentials or dipsources to\
+                  simulate them.")
 
         X_reconstructed = CM * V_s
         print "Error norm = ", (V_s-M * X_reconstructed).frobenius_norm()
@@ -96,10 +97,10 @@ def main(argv):
         model['geometry'].write_vtp(str(filename_R), X_reconstructed)
 
         if model.has_key('dipsources'):
-            om_display_vtp(filename_O)
-            om_compare_vtp(filename_O,filename_R)
+            display_vtp(filename_O)
+            compare_vtp(filename_O,filename_R)
 
-    om_display_vtp(filename_R)
+    display_vtp(filename_R)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -108,4 +109,5 @@ if __name__ == '__main__':
         if alphas.has_key(sys.argv[1]):
             main(sys.argv[1])
         else:
-            print "Please specify a correct model (and set its default alphas)."
+            print("Please specify a correct model (and set its default\
+                  alphas).")

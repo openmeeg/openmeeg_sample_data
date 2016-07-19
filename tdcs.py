@@ -12,8 +12,8 @@ under the supervision of Boris Burle
 import sys
 import numpy as np
 import openmeeg as om
-from om_basics import om_load_headmodel # openmeeg basics
-from om_display import om_display_vtp # visualiation with VTK
+from om_basics import load_headmodel # openmeeg basics
+from om_display import display_vtp # visualiation with VTK
 from os import path as op
 
 # recompute or load matrices ?
@@ -37,7 +37,7 @@ def main(argv):
     filename_HMi = op.join('tmp', argv + '_HMi.mat')
 
     if recompute:
-        model = om_load_headmodel(argv)
+        model = load_headmodel(argv)
         if recompute_HMi or not op.exists(filename_HMi): 
             hm = om.HeadMat(model['geometry'])
             hm.invert()
@@ -63,7 +63,7 @@ def main(argv):
         X = om.fromarray(Xt)
         model['geometry'].write_vtp(str(filename), X)
 
-    om_display_vtp(filename)
+    display_vtp(filename)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:

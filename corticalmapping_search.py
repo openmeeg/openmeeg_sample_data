@@ -12,8 +12,8 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import openmeeg as om
-from om_basics import om_load_headmodel, om_forward_problem # openmeeg basics
-from om_compare import om_compare_vtp # rdm and mag errors
+from om_basics import load_headmodel, forward_problem # openmeeg basics
+from om_compare import compare_vtp # rdm and mag errors
 from os import path as op
 
 # recompute or load matrices
@@ -45,7 +45,7 @@ def main(argv):
                 filename_Xo = op.join('tmp', argv + '_Xo.mat')
                 filename_CM = op.join('tmp', argv + '_CM.mat')
 
-                model = om_load_headmodel(argv)
+                model = load_headmodel(argv)
                 # Compute the projector onto the sensors
                 M = om.Head2EEGMat(model['geometry'], model['sensors'])
 
@@ -64,7 +64,7 @@ def main(argv):
                 # and then display both the reconstruction through the CorticalMapping
                 # and the original
                 if recompute_Xo or not op.exists(filename_Xo):
-                    X_original = om_forward_problem(model)
+                    X_original = forward_problem(model)
                     X_original.save(str(filename_Xo))
                 else:
                     X_original = om.Matrix(str(filename_Xo))
@@ -76,7 +76,7 @@ def main(argv):
                 model['geometry'].write_vtp(str(filename_R), X_reconstructed)
 
             norm = (V_s-M*X_reconstructed).getcol(0).norm()
-            rdm,mag = om_compare_vtp(filename_O,filename_R)
+            rdm,mag = compare_vtp(filename_O,filename_R)
             sys.stderr.write("||="+str(norm)+"\talpha="+str(alpha)+"\tbeta="+str(beta)+"\t\tRDM="+str(rdm)+"\trMAG="+str(mag)+"\t"+str(mag+rdm)+"\n")
             sys.stdout.write("||="+str(norm)+"\talpha="+str(alpha)+"\tbeta="+str(beta)+"\t\tRDM="+str(rdm)+"\trMAG="+str(mag)+"\t"+str(mag+rdm)+"\n")
             xs[alph,bet] = alpha
