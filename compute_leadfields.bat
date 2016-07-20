@@ -1,11 +1,11 @@
-set GEOMETRY=model\head_model.geom
-set CONDUCTIVITIES=model\head_model.cond
-set DIPOLES=model\cortex_dipoles_small.txt
-set EEG_ELECTRODES=model\eeg_channels_locations.txt
-set EIT_ELECTRODES=model\eit_locations.txt
-set ECOG_ELECTRODES=model\ecog_electrodes_locations.txt
-set SQUIDS=model\meg_channels_locations.squids
-set INTERNAL_ELECTRODES=model\internal_electrodes_locations.txt
+set GEOMETRY=data\model\head_model.geom
+set CONDUCTIVITIES=data\model\head_model.cond
+set DIPOLES=data\model\cortex_dipoles_small.txt
+set EEG_ELECTRODES=data\model\eeg_channels_locations.txt
+set EIT_ELECTRODES=data\model\eit_locations.txt
+set ECOG_ELECTRODES=data\model\ecog_electrodes_locations.txt
+set SQUIDS=data\model\meg_channels_locations.squids
+set INTERNAL_ELECTRODES=data\model\internal_electrodes_locations.txt
 
 rem Leadfields
 set EEG_LEADFIELD=leadfields\eeg_leadfield.mat

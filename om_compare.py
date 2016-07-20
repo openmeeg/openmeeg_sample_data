@@ -18,7 +18,7 @@ def rdmmag(X1,X2):
     print "  RDM = ",rdm, "\t  rMAG = ",rmag
     return rdm, rmag
 
-def om_compare_vtp(f1,f2):
+def compare_vtp(f1,f2):
     """
     This function computes the rdm and (relative)mag errors of VTK::vtp files generated with OpenMEEG.
     Such a file defines a polydata, containing points and triangles of several
@@ -69,9 +69,9 @@ def om_compare_vtp(f1,f2):
         print '\033[0m',
         for i_m in range(nb_meshes):
             print(" On Mesh " + cell_labels.GetValue(cell_ids[i_m]) + " :")
-            conn1 = vtk.vtkPolyDataConnectivityFilter(); conn1.SetInput(poly1)
+            conn1 = vtk.vtkPolyDataConnectivityFilter(); conn1.SetInputData(poly1)
             conn1.SetExtractionModeToCellSeededRegions(); conn1.AddSeed(cell_ids[i_m]); conn1.Update()
-            conn2 = vtk.vtkPolyDataConnectivityFilter(); conn2.SetInput(poly2)
+            conn2 = vtk.vtkPolyDataConnectivityFilter(); conn2.SetInputData(poly2)
             conn2.SetExtractionModeToCellSeededRegions(); conn2.AddSeed(cell_ids[i_m]); conn2.Update()
             V1 = conn1.GetOutput().GetPointData().GetArray('Potentials-'+str(i_s));
             P1 = conn1.GetOutput().GetCellData().GetArray('Currents-'+str(i_s));

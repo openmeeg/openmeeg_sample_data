@@ -7,11 +7,11 @@ from mayavi import mlab
 from mesh import Mesh
 
 # Load data
-cortex = Mesh("model/cortex.tri")
-eeg_electrodes = np.loadtxt('model/eeg_channels_locations.txt')
-eit_electrodes = np.loadtxt('model/eit_locations.txt')
-ecog_electrodes = np.loadtxt('model/ecog_electrodes_locations.txt')
-squids = np.loadtxt('model/meg_channels_locations.squids')
+cortex = Mesh("data/model/cortex.tri")
+eeg_electrodes = np.loadtxt('data/model/eeg_channels_locations.txt')
+eit_electrodes = np.loadtxt('data/model/eit_locations.txt')
+ecog_electrodes = np.loadtxt('data/model/ecog_electrodes_locations.txt')
+squids = np.loadtxt('data/model/meg_channels_locations.squids')
 
 ##############################################################################
 # Load 4 leadfields
@@ -79,7 +79,7 @@ j_eit[idx_out] = -1 # -1 current leaves in idx_out electrode
 v_eit = np.dot(G_eit, j_eit)
 
 # View results
-electrodes_mesh = Mesh("model/eeg_channels_mesh.tri")
+electrodes_mesh = Mesh("data/model/eeg_channels_mesh.tri")
 electrodes_mesh.plot(scalars=v_eit)
 
 mlab.points3d(eeg_electrodes[[idx_in, idx_out], 0],
@@ -89,7 +89,7 @@ mlab.points3d(eeg_electrodes[[idx_in, idx_out], 0],
 
 ###############################################################################
 # Internal potential leadfield
-int_elecs = np.loadtxt('model/internal_electrodes_locations.txt')
+int_elecs = np.loadtxt('data/model/internal_electrodes_locations.txt')
 mlab.figure(5)
 mlab.clf()
 

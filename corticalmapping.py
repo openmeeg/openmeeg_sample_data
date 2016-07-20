@@ -17,9 +17,9 @@ under the supervision of Boris Burle
 import sys
 import numpy as np
 import openmeeg as om
-from om_basics  import om_load_headmodel, om_forward_problem # openmeeg basics
-from om_display import om_display_vtp # visualiation with VTK
-from om_compare import om_compare_vtp # rdm and mag errors
+from om_basics  import load_headmodel, forward_problem # openmeeg basics
+from openmeeg_viz import display_vtp # visualiation with VTK
+from om_compare import compare_vtp # rdm and mag errors
 from os import path as op
 
 # These are good parameters for cortical mapping reconstruction
@@ -29,7 +29,7 @@ alphas['Head2'] = 1.39e-7; betas['Head2'] = 1.e-5; gammas['Head2'] = 7.3
 alphas['Head3'] = 2.69e-6; betas['Head3'] = 5.18e-5; gammas['Head3'] = 4.76
 alphas['canonical'] = 1e-7; betas['canonical'] = 0.0413; gammas['canonical'] = 270.
 alphas['canonical_real'] = 1e-7; betas['canonical_real'] = 0.0413; gammas['canonical_real'] = 780.
-alphas['mni152'] = 1.3e-11;	betas['mni152'] = 1.69e-9; gammas['mni152'] = 10.37
+alphas['mni152'] = 1.3e-11; betas['mni152'] = 1.69e-9; gammas['mni152'] = 10.37
 alphas['mni152_real'] = 1.3e-11; betas['mni152_real'] = 1.69e-9; gammas['mni152_real'] = 10.37
 
 # adding a new model ?: put negative values for (alphas,betas), and the code
@@ -59,14 +59,14 @@ def main(argv):
         filename_Xo = op.join('tmp', argv + '_Xo.mat')
         filename_CM = op.join('tmp', argv + '_CM.mat')
 
-        model = om_load_headmodel(argv)
+        model = load_headmodel(argv)
         # Compute the projector onto the sensors
         M = om.Head2EEGMat(model['geometry'], model['sensors'])
 
         # 'Brain' is the name of the domain containing the sources (a-priori)
         if recompute_CM or not op.exists(filename_CM): 
             # CM, a matrix N_unknown X N_sensors
-            #CM = om.CorticalMat(model['geometry'], M, 'Brain',3, alphas[argv], betas[argv], op.join('matrices',argv + '_P.mat'))
+            #CM = om.CorticalMat(model['geometry'], M, 'Brain',3, alphas[argv], betas[argv], op.join('tmp',argv + '_P.mat'))
             CM = om.CorticalMat2(model['geometry'], M, 'Brain',3, gammas[argv], op.join('tmp',argv + '_H.mat'))
             CM.save(str(filename_CM))
         else:
@@ -77,7 +77,7 @@ def main(argv):
             # and then display both the reconstruction through the CorticalMapping
             # and the original
             if recompute_Xo or not op.exists(filename_Xo):
-                X_original = om_forward_problem(model)
+                X_original = forward_problem(model)
                 X_original.save(str(filename_Xo))
             else:
                 X_original = om.Matrix(str(filename_Xo))
@@ -85,7 +85,8 @@ def main(argv):
         elif model.has_key('potentials'):
             V_s = model['potentials']
         else:
-            print "Error: either specify input potentials or dipsources to simulate them."
+            print("Error: either specify input potentials or dipsources to\
+                  simulate them.")
 
         X_reconstructed = CM * V_s
         print "Error norm = ", (V_s-M * X_reconstructed).frobenius_norm()
@@ -96,10 +97,10 @@ def main(argv):
         model['geometry'].write_vtp(str(filename_R), X_reconstructed)
 
         if model.has_key('dipsources'):
-            om_display_vtp(filename_O)
-            om_compare_vtp(filename_O,filename_R)
+            display_vtp(filename_O)
+            compare_vtp(filename_O,filename_R)
 
-    om_display_vtp(filename_R)
+    display_vtp(filename_R)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -108,4 +109,5 @@ if __name__ == '__main__':
         if alphas.has_key(sys.argv[1]):
             main(sys.argv[1])
         else:
-            print "Please specify a correct model (and set its default alphas)."
+            print("Please specify a correct model (and set its default\
+                  alphas).")
