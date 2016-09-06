@@ -13,7 +13,7 @@ import sys
 import numpy as np
 import openmeeg as om
 from om_basics import load_headmodel # openmeeg basics
-from om_display import display_vtp # visualiation with VTK
+from openmeeg_viz import display_vtp # visualiation with VTK
 from os import path as op
 
 # recompute or load matrices ?
@@ -43,7 +43,7 @@ def main(argv):
             hm.invert()
             hm.save(str(filename_HMi))
         else:
-            print "Loading " + str(filename_HMi)
+            print("Loading " + str(filename_HMi))
             hm = om.SymMatrix(str(filename_HMi))
 
         sm = om.EITSourceMat(model['geometry'], model['tdcssources'])
