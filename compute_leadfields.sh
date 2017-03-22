@@ -17,7 +17,7 @@ MEG_LEADFIELD=leadfields/meg_leadfield.mat
 MEG_LEADFIELD_ADJOINT=leadfields/meg_leadfield_adjoint.mat
 EIT_LEADFIELD=leadfields/eit_leadfield.mat
 IP_LEADFIELD=leadfields/ip_leadfield.mat
-SIP_LEADFIELD=leadfields/sip_leadfield.mat
+EITIP_LEADFIELD=leadfields/eitip_leadfield.mat
 
 # Name temporary matrices
 HM=tmp/tmp.hm           # For EEG and MEG
@@ -64,5 +64,5 @@ om_assemble -H2IPM ${GEOMETRY} ${CONDUCTIVITIES} ${INTERNAL_ELECTRODES} ${IPHM}
 om_assemble -DS2IPM ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${INTERNAL_ELECTRODES} ${IPSM}
 om_gain -IP ${HMINV} ${DSM} ${IPHM} ${IPSM} ${IP_LEADFIELD}
 # ...for boundary-injected current
-om_gain -SIP ${HMINV} ${EITSM} ${IPHM} ${SIP_LEADFIELD}
+om_gain -EITIP ${HMINV} ${EITSM} ${IPHM} ${EITIP_LEADFIELD}
 
