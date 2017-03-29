@@ -73,5 +73,5 @@ rem ...for internal dipoles
 om_assemble -DS2IPM %GEOMETRY% %CONDUCTIVITIES% %DIPOLES% %INTERNAL_ELECTRODES% %IPSM%
 om_gain -IP %HMINV% %DSM% %IPHM% %IPSM% %IP_LEADFIELD%
 rem ...for boundary-injected current
-om_gain -SIP %HMINV%  %EITSM% %IPHM% %SIP_LEADFIELD%
+om_gain -EITIP %HMINV%  %EITSM% %IPHM% %EITIP_LEADFIELD%
 
