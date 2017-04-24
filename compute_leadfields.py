@@ -62,13 +62,16 @@ else:
     hm.invert()
     hm.save("tmp/hmi.mat")
     hminv = hm
-    # hminv = hm.inverse() # to also test the adjoint method: comment the 3 previous lines, and uncomment this line, and the two others containing 'adjoint'
+    # hminv = hm.inverse() # to also test the adjoint method: comment the 3
+    # previous lines, and uncomment this line, and the two others containing
+    # 'adjoint'
 
 if op.exists("tmp/dsm.mat"):
     dsm = om.Matrix("tmp/dsm.mat")
     print("DSM loaded from ", "tmp/dsm.mat")
 else:
-    dsm = om.DipSourceMat(geom, dipoles, gauss_order, use_adaptive_integration, "Brain")
+    dsm = om.DipSourceMat(geom, dipoles, gauss_order,
+                          use_adaptive_integration, "Brain")
     dsm.save("tmp/dsm.mat")
 
 # For EEG
@@ -102,12 +105,18 @@ print("h2em           : %d x %d" % (h2em.nlin(), h2em.ncol()))
 print("h2ecogm        : %d x %d" % (h2ecogm.nlin(), h2ecogm.ncol()))
 print("ds2mm          : %d x %d" % (ds2mm.nlin(), ds2mm.ncol()))
 print("h2mm           : %d x %d" % (h2mm.nlin(), h2mm.ncol()))
-print("eeg_leadfield  : %d x %d" % (eeg_leadfield.nlin(), eeg_leadfield.ncol()))
-print("ecog_leadfield : %d x %d" % (ecog_leadfield.nlin(), ecog_leadfield.ncol()))
-print("meg_leadfield  : %d x %d" % (meg_leadfield.nlin(), meg_leadfield.ncol()))
-print("eit_leadfield  : %d x %d" % (eit_leadfield.nlin(), eit_leadfield.ncol()))
-print("ip_leadfield   : %d x %d" % (ip_leadfield.nlin(), ip_leadfield.ncol()))
-print("eitip_leadfield  : %d x %d" % (eitip_leadfield.nlin(), eitip_leadfield.ncol()))
+print("eeg_leadfield  : %d x %d" % (eeg_leadfield.nlin(),
+                                    eeg_leadfield.ncol()))
+print("ecog_leadfield : %d x %d" % (ecog_leadfield.nlin(),
+                                    ecog_leadfield.ncol()))
+print("meg_leadfield  : %d x %d" % (meg_leadfield.nlin(),
+                                    meg_leadfield.ncol()))
+print("eit_leadfield  : %d x %d" % (eit_leadfield.nlin(),
+                                    eit_leadfield.ncol()))
+print("ip_leadfield   : %d x %d" % (ip_leadfield.nlin(),
+                                    ip_leadfield.ncol()))
+print("eitip_leadfield  : %d x %d" % (eitip_leadfield.nlin(),
+                                      eitip_leadfield.ncol()))
 
 eeg_leadfield.save('leadfields/eeg_leadfield.mat')
 # eeg_leadfield_adjoint.save('leadfields/eeg_leadfield_adjoint.mat')

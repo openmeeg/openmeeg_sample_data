@@ -1,6 +1,5 @@
 import numpy as np
 import openmeeg as om
-from scipy import io
 from scipy import linalg
 from mayavi import mlab
 from mesh import Mesh
@@ -35,6 +34,7 @@ mlab.figure(1)
 mlab.clf()
 electrodes_mesh.plot(opacity=1, scalars=m)
 
+
 ###############################################################################
 # Run minimum norm
 def minimum_norm(m, G, lambd):
@@ -49,8 +49,9 @@ def minimum_norm(m, G, lambd):
     """
     n_channels = G.shape[0]
     x = np.dot(G.T,
-            linalg.solve(np.dot(G, G.T) + lambd * np.eye(n_channels), m))
+               linalg.solve(np.dot(G, G.T) + lambd * np.eye(n_channels), m))
     return x
+
 
 lambd = 1e-20
 x_estimated = minimum_norm(m, G_eeg, lambd)
@@ -60,4 +61,3 @@ mlab.figure(2)
 mlab.clf()
 cortex.plot(opacity=1, scalars=x_estimated)
 mlab.show()
-
