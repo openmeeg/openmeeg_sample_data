@@ -7,9 +7,11 @@ Either alphas, betas for the CorticalMat
 
 """
 
+from __future__ import print_function
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import openmeeg as om
 from om_basics import load_headmodel, forward_problem  # openmeeg basics
 from om_compare import compare_vtp  # rdm and mag errors
@@ -19,6 +21,7 @@ from os import path as op
 recompute = True
 recompute_CM = True
 recompute_Xo = False
+Axes3D
 
 
 def main(argv):
@@ -82,14 +85,12 @@ def main(argv):
 
             norm = (V_s-M*X_reconstructed).getcol(0).norm()
             rdm, mag = compare_vtp(filename_O, filename_R)
-            sys.stderr.write("||=" + str(norm) + "\talpha=" + str(alpha) +
-                             "\tbeta=" + str(beta) + "\t\tRDM=" + str(rdm) +
-                             "\trMAG=" + str(mag) + "\t" + str(mag + rdm) +
-                             "\n")
-            sys.stdout.write("||=" + str(norm) + "\talpha=" + str(alpha) +
-                             "\tbeta=" + str(beta) + "\t\tRDM=" + str(rdm) +
-                             "\trMAG=" + str(mag) + "\t" + str(mag + rdm) +
-                             "\n")
+            print("||=%f" % norm, "\talpha=%f" % alpha, "\tbeta=%f" % beta,
+                  "\t\tRDM=%f" % rdm, "\trMAG=%f" % mag, "\t", str(mag + rdm),
+                  "\n", file=sys.stderr)
+            print("||=%f" % norm, "\talpha=%f" % alpha, "\tbeta=%f" % beta,
+                  "\t\tRDM=%f" % rdm, "\trMAG=%f" % mag, "\t", str(mag + rdm),
+                  "\n")
             xs[alph, bet] = alpha
             ys[alph, bet] = beta
             zs[alph, bet] = rdm + mag
@@ -99,10 +100,10 @@ def main(argv):
     ax.set_ylabel('beta')
     ax.set_zlabel('RDM + MAG')
     i = np.nonzero(zs == np.min(zs))
-    sys.stderr.write('xs = ' + str(xs[i]) + ' ys = ' + str(ys[i]) +
-                     ' rdm+mag= ' + str(np.min(zs)) + "\n")
-    sys.stdout.write('xs = ' + str(xs[i]) + ' ys = ' + str(ys[i]) +
-                     ' rdm+mag= ' + str(np.min(zs)) + "\n")
+    print('xs = %f' % xs[i], ' ys = %f' % ys[i], ' rdm+mag=%f' % np.min(zs),
+          "\n", file=sys.stderr)
+    print('xs = %f' % xs[i], ' ys = %f' % ys[i], ' rdm+mag=%f' % np.min(zs),
+          "\n")
     plt.show()
 
 

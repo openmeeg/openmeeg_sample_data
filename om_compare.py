@@ -5,6 +5,7 @@ Created on Wed Dec 11 2013
 @author: - E. Olivi
 """
 
+from __future__ import print_function
 import vtk
 from vtk.util.numpy_support import vtk_to_numpy
 from numpy import linalg as la
@@ -15,7 +16,7 @@ def rdmmag(X1, X2):
     X2 = vtk_to_numpy(X2)
     rdm = la.norm(X1 / la.norm(X1) - X2 / la.norm(X2))
     rmag = abs(1.-la.norm(X2)/la.norm(X1))
-    print "  RDM = ", rdm, "\t  rMAG = ", rmag
+    print("  RDM = ", rdm, "\t  rMAG = ", rmag)
     return rdm, rmag
 
 
@@ -60,21 +61,21 @@ def compare_vtp(f1, f2):
             nb_meshes += 1
 
     # TODO remove the min here for full comparisons
-    for i_s in range(min(nb_sources, 5)):
-        print'\033[91m' + "Source " + str(i_s) + " :" + '\033[0m'
-        V1 = poly1.GetPointData().GetArray('Potentials-'+str(i_s))
-        P1 = poly1.GetCellData().GetArray('Currents-'+str(i_s))
-        V2 = poly2.GetPointData().GetArray('Potentials-'+str(i_s))
-        P2 = poly2.GetCellData().GetArray('Currents-'+str(i_s))
-        print '\033[94m'+" all potentials :",
+    for i_s in range(nb_sources):
+        print('\033[91m', "Source ", str(i_s), " :", '\033[0m')
+        V1 = poly1.GetPointData().GetArray('Potentials-%d' % i_s)
+        P1 = poly1.GetCellData().GetArray('Currents-%d' % i_s)
+        V2 = poly2.GetPointData().GetArray('Potentials-%d' % i_s)
+        P2 = poly2.GetCellData().GetArray('Currents-%d' % i_s)
+        print('\033[94m', " all potentials :", end="")
         rd0, mg0 = rdmmag(V1, V2)
-        print " all currents   :",
+        print(" all currents   :", end="")
         rd1, mg1 = rdmmag(P1, P2)
-        maxrdm = min(maxrdm, rd0+rd1)
-        maxmag = min(maxmag, mg0+mg1)
-        print '\033[0m',
+        maxrdm = min(maxrdm, rd0 + rd1)
+        maxmag = min(maxmag, mg0 + mg1)
+        print('\033[0m', end="")
         for i_m in range(nb_meshes):
-            print(" On Mesh " + cell_labels.GetValue(cell_ids[i_m]) + " :")
+            print(" On Mesh ", cell_labels.GetValue(cell_ids[i_m]), " :")
             conn1 = vtk.vtkPolyDataConnectivityFilter()
             conn1.SetInputData(poly1)
             conn1.SetExtractionModeToCellSeededRegions()
@@ -86,17 +87,16 @@ def compare_vtp(f1, f2):
             conn2.AddSeed(cell_ids[i_m])
             conn2.Update()
             V1 = (conn1.GetOutput().GetPointData()
-                  .GetArray('Potentials-'+str(i_s)))
+                  .GetArray('Potentials-%d' % i_s))
             P1 = (conn1.GetOutput().GetCellData()
-                  .GetArray('Currents-'+str(i_s)))
+                  .GetArray('Currents-%d' % i_s))
             V2 = (conn2.GetOutput().GetPointData()
-                  .GetArray('Potentials-'+str(i_s)))
+                  .GetArray('Potentials-%d' % i_s))
             P2 = (conn2.GetOutput().GetCellData()
-                  .GetArray('Currents-'+str(i_s)))
-            print " \t potentials :",
+                  .GetArray('Currents-%d' % i_s))
+            print(" \t potentials :", end="")
             rdmmag(V1, V2)
-            if (cell_labels.GetValue(cell_ids[i_m]) != "Scalp") & \
-               (cell_labels.GetValue(cell_ids[i_m]) != "scalp"):
-                print " \t currents   :",
+            if (cell_labels.GetValue(cell_ids[i_m]).lower() != "scalp"):
+                print(" \t currents   :", end="")
                 rd, mg = rdmmag(P1, P2)
-                return maxrdm, maxmag
+    return maxrdm, maxmag

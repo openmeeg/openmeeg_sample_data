@@ -23,6 +23,8 @@ from openmeeg_viz import display_vtp  # visualiation with VTK
 from om_compare import compare_vtp    # rdm and mag errors
 from os import path as op
 
+print(__doc__)
+
 # These are good parameters for cortical mapping reconstruction
 alphas = \
      {'Head1': 1.e-4, 'Head2': 1.39e-7, 'Head3': 2.69e-6, 'canonical': 1e-7,
@@ -90,11 +92,11 @@ def main(argv):
         elif 'potentials' in model:
             V_s = model['potentials']
         else:
-            print("Error: either specify input potentials or dipsources to\
-                  simulate them.")
+            print("Error: either specify input potentials or dipsources to",
+                  "simulate them.")
 
         X_reconstructed = CM * V_s
-        print "Error norm = ", (V_s-M * X_reconstructed).frobenius_norm()
+        print("Error norm = ", (V_s-M * X_reconstructed).frobenius_norm())
 
         # write the geometry and the solution as a VTK file
         # (viewable in pavaview)
@@ -116,5 +118,5 @@ if __name__ == '__main__':
         if sys.argv[1] in alphas:
             main(sys.argv[1])
         else:
-            print("Please specify a correct model (and set its default\
-                  alphas).")
+            print("Please specify a correct model",
+                  " (and set its default alphas)")

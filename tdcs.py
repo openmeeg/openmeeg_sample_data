@@ -17,6 +17,8 @@ from om_basics import load_headmodel  # openmeeg basics
 from openmeeg_viz import display_vtp  # visualiation with VTK
 from os import path as op
 
+print(__doc__)
+
 # recompute or load matrices ?
 recompute = True
 recompute_HMi = False
@@ -43,10 +45,10 @@ def main(argv):
         if recompute_HMi or not op.exists(filename_HMi):
             hm = om.HeadMat(model['geometry'])
             hm.invert()
-            hm.save(str(filename_HMi))
+            hm.save(filename_HMi)
         else:
-            print("Loading " + str(filename_HMi))
-            hm = om.SymMatrix(str(filename_HMi))
+            print("Loading %s" % filename_HMi)
+            hm = om.SymMatrix(filename_HMi)
 
         sm = om.EITSourceMat(model['geometry'], model['tdcssources'])
         # set here the input currents (actually a current density [I/L])
@@ -68,7 +70,7 @@ def main(argv):
                                        model['tdcssources'].getWeights()(s)
 
         X = om.fromarray(Xt)
-        model['geometry'].write_vtp(str(filename), X)
+        model['geometry'].write_vtp(filename, X)
 
     display_vtp(filename)
 
