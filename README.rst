@@ -1,3 +1,8 @@
+|Travis|_
+
+.. |Travis| image:: https://api.travis-ci.org/openmeeg/openmeeg_sample_data.svg?branch=master
+.. _Travis: https://travis-ci.org/openmeeg/openmeeg_sample_data
+
 These examples contain mainly two different views on how to use OpenMEEG with scripting languages
 ==================================================================================================
 
