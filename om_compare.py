@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 """
-Created on Wed Dec 11 2013
+Created on Wed Dec 11 2013.
 
 @author: - E. Olivi
 """
@@ -12,16 +11,19 @@ from numpy import linalg as la
 
 
 def rdmmag(X1, X2):
+    """Rdm and Mag calculation."""
     X1 = vtk_to_numpy(X1)
     X2 = vtk_to_numpy(X2)
     rdm = la.norm(X1 / la.norm(X1) - X2 / la.norm(X2))
-    rmag = abs(1.-la.norm(X2)/la.norm(X1))
+    rmag = abs(1. - la.norm(X2) / la.norm(X1))
     print("  RDM = ", rdm, "\t  rMAG = ", rmag)
     return rdm, rmag
 
 
 def compare_vtp(f1, f2):
     """
+    Compute errors.
+
     This function computes the rdm and (relative)mag errors of VTK::vtp files
     generated with OpenMEEG.
     Such a file defines a polydata, containing points and triangles of several
@@ -43,7 +45,7 @@ def compare_vtp(f1, f2):
     reader2.Update()
     poly2 = reader2.GetOutput()
     # determine number of sources
-    nb_sources = poly1.GetPointData().GetNumberOfArrays()-1
+    nb_sources = poly1.GetPointData().GetNumberOfArrays() - 1
     # ensure it is the same geometry
     assert(poly1.GetNumberOfPoints() == poly2.GetNumberOfPoints())
     assert(poly1.GetNumberOfCells() == poly2.GetNumberOfCells())
@@ -62,7 +64,7 @@ def compare_vtp(f1, f2):
 
     # TODO remove the min here for full comparisons
     for i_s in range(nb_sources):
-        print('\033[91m', "Source ", str(i_s), " :", '\033[0m')
+        print('\033[91m', "Source ", str(i_s), " :", '\033[0m')
         V1 = poly1.GetPointData().GetArray('Potentials-%d' % i_s)
         P1 = poly1.GetCellData().GetArray('Currents-%d' % i_s)
         V2 = poly2.GetPointData().GetArray('Potentials-%d' % i_s)
@@ -75,7 +77,7 @@ def compare_vtp(f1, f2):
         maxmag = min(maxmag, mg0 + mg1)
         print('\033[0m', end="")
         for i_m in range(nb_meshes):
-            print(" On Mesh ", cell_labels.GetValue(cell_ids[i_m]), " :")
+            print(" On Mesh ", cell_labels.GetValue(cell_ids[i_m]), " :")
             conn1 = vtk.vtkPolyDataConnectivityFilter()
             conn1.SetInputData(poly1)
             conn1.SetExtractionModeToCellSeededRegions()

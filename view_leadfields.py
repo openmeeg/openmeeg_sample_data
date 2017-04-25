@@ -1,5 +1,4 @@
-"""Sample code to explore the leadfields computed with compute_leadfields.py
-"""
+"""Sample code to explore the leadfields computed with compute_leadfields."""
 
 import numpy as np
 from mayavi import mlab

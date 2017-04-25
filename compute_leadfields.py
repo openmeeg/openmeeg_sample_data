@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
-"""Compute the 5 types of leadfields supported by OpenMEEG
-    - EEG
-    - MEG
-    - EIT
-    - Internal Potential for dipolar source
-    - Internal Potential for boundary injected current
+"""Compute the 5 types of leadfields supported by OpenMEEG.
+
+- EEG
+- MEG
+- EIT
+- Internal Potential for dipolar source
+- Internal Potential for boundary injected current
 """
 
 from __future__ import print_function

@@ -38,7 +38,8 @@ electrodes_mesh.plot(opacity=1, scalars=m)
 ###############################################################################
 # Run minimum norm
 def minimum_norm(m, G, lambd):
-    """Compute basic Minimum Norm solution
+    """Compute basic Minimum Norm solution.
+
     x = G^T (G * G^T + lambda * I)^(-1) m
 
     Note

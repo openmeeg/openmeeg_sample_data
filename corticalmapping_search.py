@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
-This code is made to search parameters for the cortical mapping.
+Code is made to search parameters for the cortical mapping.
+
 Either alphas, betas for the CorticalMat
     or gammas for the CorticalMat2
-
 """
 
 from __future__ import print_function
@@ -25,6 +24,7 @@ Axes3D
 
 
 def main(argv):
+    """Search parameters for the cortical mapping."""
     filename_O = 'leadfields/Original_' + argv + '.vtp'
     filename_R = 'leadfields/Reconstructed_' + argv + '.vtp'
     fig = plt.figure()
@@ -83,7 +83,7 @@ def main(argv):
                 # (viewable in pavaview)
                 model['geometry'].write_vtp(str(filename_R), X_reconstructed)
 
-            norm = (V_s-M*X_reconstructed).getcol(0).norm()
+            norm = (V_s - M * X_reconstructed).getcol(0).norm()
             rdm, mag = compare_vtp(filename_O, filename_R)
             print("||=%f" % norm, "\talpha=%f" % alpha, "\tbeta=%f" % beta,
                   "\t\tRDM=%f" % rdm, "\trMAG=%f" % mag, "\t", str(mag + rdm),
