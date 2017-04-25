@@ -1,5 +1,6 @@
-""" View BEM head model
-    - cortex + 3 BEM layers with EEG and MEG sensors locations
+"""View BEM head model.
+
+cortex + 3 BEM layers with EEG and MEG sensors locations
 """
 from mesh import Mesh
 import numpy as np

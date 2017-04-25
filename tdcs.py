@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
-Created on Tues. January 14 2014
+Created on Tues. January 14 2014.
 
 @author: - E. Olivi
 This work has been done for the
@@ -28,7 +27,7 @@ recompute_HMi = False
 
 
 def main(argv):
-
+    """Compute the tdcs."""
     # create a dir for leadfields and tmp
     if not op.exists("tmp"):
         import os

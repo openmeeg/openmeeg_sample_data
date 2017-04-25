@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Feb 14 15:43:44 2010
+Created on Sun Feb 14 15:43:44 2010.
 
 @author: - B. Burle & A. Gramfort
 """
@@ -10,9 +10,11 @@ import openmeeg as om
 
 
 class Mesh():
-    '''
-    A class allowing to open meshes
-    data (vertices and triangles), and plot their respective surfaces
+    """
+    A class allowing to open meshes.
+
+    A class allowing to open meshes data (vertices and triangles), and plot.
+    their respective surfaces.
 
     Example:
     --------
@@ -21,15 +23,17 @@ class Mesh():
     To plot the surface of the corresponding object, call the function
     'self.plot(**kwarg)'. The kwarg options are the one from
     mayavi.mlab.triangular_mesh
+    """
 
-    '''
     def __init__(self, fname=None):
+        """Give a filename."""
         self.points = []
         self.faces = []
         if fname is not None:
             self.load(fname)
 
     def load(self, fname):
+        """Load a filename."""
         m = om.Mesh(fname)
         self.points = np.zeros((m.nb_vertices(), 3), dtype=float)
         self.faces = np.zeros((m.nb_triangles(), 3), dtype=int)
@@ -51,8 +55,7 @@ class Mesh():
             tit.incr()
 
     def plot(self, **kwarg):
-        '''Plot mesh with Mayavi
-        '''
+        """Plot mesh with Mayavi."""
         from mayavi import mlab
         f = mlab.triangular_mesh(self.points[:, 0], self.points[:, 1],
                                  self.points[:, 2], self.faces, **kwarg)

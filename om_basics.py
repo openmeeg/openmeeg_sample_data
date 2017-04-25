@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 """
-Created on Mon Nov 25 2013
+Created on Mon Nov 25 2013.
 
 @author: - E. Olivi
 """
@@ -10,8 +9,11 @@ from os import path as op
 
 
 def load_headmodel(name, prefix='data'):
-    """ Load a headmodel: read the geometry, conductivities and sources
-    eventually."""
+    """Load a headmodel.
+
+    read the geometry, conductivities and sources
+    eventually.
+    """
     cond_file = op.join(prefix, name, name + '.cond')
     geom_file = op.join(prefix, name, name + '.geom')
     patches_file = op.join(prefix, name, name + '.patches')
@@ -36,7 +38,7 @@ def load_headmodel(name, prefix='data'):
 
 
 def forward_problem(m):
-    """ Compute a Forward problem given a model with geometry and sources """
+    """Compute a Forward problem given a model with geometry and sources."""
     hm = om.HeadMat(m['geometry'])
     hm.invert()  # invert in place (no copy)
     dsm = om.DipSourceMat(m['geometry'], m['dipsources'])

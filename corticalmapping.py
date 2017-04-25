@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
-Created on December 2014
+Created on December 2014.
 
 This uses the method develloped in:
-M. Clerc, J. Kybic "Cortical mapping by Laplace–Cauchy transmission using a
+M. Clerc, J. Kybic "Cortical mapping by Laplace-Cauchy transmission using a
 boundary element method".
 calling the OpenMEEG class CorticalMat.
 There is also an alternative solver CorticalMat2.
@@ -36,7 +35,7 @@ gammas = {'Head1': 12.4, 'Head2': 7.3, 'Head3': 4.76,
           'canonical': 270., 'canonical_real': 780.,
           'mni152': 10.37, 'mni152_real': 10.37}
 
-# adding a new model ?: put negative values for (alphas, betas), and the code
+# adding a new model ?: put negative values for (alphas, betas), and the code
 # will automatically estimated the parameters. (betas are often misestimated)
 # for CorticalMat2: only choose a gamma parameter
 
@@ -47,7 +46,7 @@ recompute_Xo = False
 
 
 def main(argv):
-
+    """Compute the cortical mapping."""
     # create a dir for leadfields and tmp
     if not op.exists("tmp"):
         import os
