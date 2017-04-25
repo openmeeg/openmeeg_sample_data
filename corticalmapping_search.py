@@ -83,7 +83,7 @@ def main(argv):
                 # (viewable in pavaview)
                 model['geometry'].write_vtp(str(filename_R), X_reconstructed)
 
-            norm = (V_s-M*X_reconstructed).getcol(0).norm()
+            norm = (V_s - M * X_reconstructed).getcol(0).norm()
             rdm, mag = compare_vtp(filename_O, filename_R)
             print("||=%f" % norm, "\talpha=%f" % alpha, "\tbeta=%f" % beta,
                   "\t\tRDM=%f" % rdm, "\trMAG=%f" % mag, "\t", str(mag + rdm),

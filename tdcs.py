@@ -56,18 +56,19 @@ def main(argv):
             np.array([[-4., 1.], [1., -4.], [1., 1.], [1., 1.], [1., 1.]]))
         # each column must have a zero mean
         # now apply the currents and get the result
-        X = hm*(sm*activation)
+        X = hm * (sm * activation)
         # concatenate X with input currents (to see the what was injected)
         Xt = np.append(om.asarray(X),
-                       np.zeros((model['geometry'].size()-X.nlin(), X.ncol())),
+                       np.zeros((model['geometry'].size() - X.nlin(),
+                                 X.ncol())),
                        0)
         currents = om.asarray(activation)
         for s in range(model['tdcssources'].getNumberOfSensors()):
             # get the triangles supporting this sensor
             tris = model['tdcssources'].getInjectionTriangles(s)
             for it in tris:
-                Xt[it.getindex(), :] = currents[s, :] * \
-                                       model['tdcssources'].getWeights()(s)
+                Xt[it.getindex(), :] = (currents[s, :] *
+                                        model['tdcssources'].getWeights()(s))
 
         X = om.fromarray(Xt)
         model['geometry'].write_vtp(filename, X)

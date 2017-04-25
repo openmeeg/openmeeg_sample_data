@@ -40,4 +40,4 @@ def forward_problem(m):
     hm = om.HeadMat(m['geometry'])
     hm.invert()  # invert in place (no copy)
     dsm = om.DipSourceMat(m['geometry'], m['dipsources'])
-    return hm*dsm
+    return hm * dsm

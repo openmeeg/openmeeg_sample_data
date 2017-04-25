@@ -15,7 +15,7 @@ def rdmmag(X1, X2):
     X1 = vtk_to_numpy(X1)
     X2 = vtk_to_numpy(X2)
     rdm = la.norm(X1 / la.norm(X1) - X2 / la.norm(X2))
-    rmag = abs(1.-la.norm(X2)/la.norm(X1))
+    rmag = abs(1. - la.norm(X2) / la.norm(X1))
     print("  RDM = ", rdm, "\t  rMAG = ", rmag)
     return rdm, rmag
 
@@ -43,7 +43,7 @@ def compare_vtp(f1, f2):
     reader2.Update()
     poly2 = reader2.GetOutput()
     # determine number of sources
-    nb_sources = poly1.GetPointData().GetNumberOfArrays()-1
+    nb_sources = poly1.GetPointData().GetNumberOfArrays() - 1
     # ensure it is the same geometry
     assert(poly1.GetNumberOfPoints() == poly2.GetNumberOfPoints())
     assert(poly1.GetNumberOfCells() == poly2.GetNumberOfCells())
