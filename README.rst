@@ -78,16 +78,16 @@ See sample_output.txt to see what the scripts output should look like.
 
 On a recent workstation the computation takes about::
 
-			744.66 s    344.12 s  390.41 s om_assemble -HM
-		 +  431.74 s	188.5 s   246.5 s  om_inverser
-		 +  2689.71	    545.1 s	  719.13 s om_assemble -DSM
-		 +  0.13 s	     0.02 s   0.04 s   om_assemble -H2EM
-		 + 80.92 s	     3.19 s	  16.42 s  om_gain -EEG
-		 + 3.39 s.	     0.88 s   1.23 s   om_assemble -H2MM
-		 + 2.33 s	     0.21 s	  0.95 s   om_assemble -DS2MM
-		 + 84.84 s	     4.17 s	  17.65 s  om_gain -MEG
-	                             173.49 s  om_assemble -EITSM
-	                               1.15 s  om_gain -EEG
+           744.66 s  344.12 s   390.41 s om_assemble -HM
+         + 431.74 s   188.5 s   246.5 s  om_inverser
+         + 2689.71 s  545.1 s   719.13 s om_assemble -DSM
+         + 0.13 s      0.02 s   0.04 s   om_assemble -H2EM
+         + 80.92 s     3.19 s   16.42 s  om_gain -EEG
+         + 3.39 s.     0.88 s   1.23 s   om_assemble -H2MM
+         + 2.33 s      0.21 s   0.95 s   om_assemble -DS2MM
+         + 84.84 s     4.17 s   17.65 s  om_gain -MEG
+                                173.49 s om_assemble -EITSM
+                                 1.15 s  om_gain -EEG
 
 
 II) Compute and apply a corticial mapping, TDCS
