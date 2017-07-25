@@ -1,3 +1,5 @@
+.. -*- mode: rst -*-
+
 |Travis|_
 
 .. |Travis| image:: https://api.travis-ci.org/openmeeg/openmeeg_sample_data.svg?branch=master
@@ -5,47 +7,58 @@
 
 CAVEAT on using the python wrapper (see bottom)
 
-These examples contain mainly two different views on how to use OpenMEEG with scripting languages
-==================================================================================================
+**These examples contain mainly two different views on how to use OpenMEEG with scripting languages**
 
-I) Computing/viewing EEG/MEG/EIT leadfields from bash, DOS, or python 
---
-it concerns files compute_leadfields.* view_leadfields.* mesh.py example_inverse_problem.py view_head_model.py.
+I) Computing/viewing EEG/MEG/EIT leadfields from bash, DOS, or Python
+---------------------------------------------------------------------
+
+It concerns files compute_leadfields.* view_leadfields.* mesh.py example_inverse_problem.py view_head_model.py.
 The viewer works with mayavi.
 
 II) Compute and apply a corticial mapping, TDCS (Transcranial direct-current stimulation)
---
-it concerns files corticalmapping*.py tdcs.py data/canonical/* data/canonical_real/*
-and uses python tools for viewing: om_display.py, om_compare.py, om_basics.py.
-The viewer works on vtk.
+-----------------------------------------------------------------------------------------
+
+It concerns files::
+
+	corticalmapping*.py tdcs.py data/canonical/* data/canonical_real/*
+
+and uses Python tools for viewing::
+
+	om_display.py, om_compare.py, om_basics.py
+
+The viewer works with VTK.
 
 Here are more details:
 
 I) Computing/viewing EEG/MEG/EIT leadfields
 -------------------------------------------
 
-Demo scripts to compute leadfields with OpenMEEG
+Demo scripts to compute leadfields with OpenMEEG:
 
 - Supports EEG, MEG, EIT and Internal potential leadfields
 
 This folder contains a sample realistic dataset for EEG, MEG, EIT
 and internal potential forward modeling.
 
-The head model is a 3 layers model with 3 nested meshes:
-brain.tri, skull.tri and head.tri
+The head model is a 3 layers model with 3 nested meshes::
+
+	brain.tri, skull.tri and head.tri
 
 To run the computation you can use the scripts:
 
 On windows (bat script):
 ------------------------
-   compute_leadfields.bat
+
+    compute_leadfields.bat
 
 On Linux or Mac OS X (bash script):
 -----------------------------------
+
 	./compute_leadfields.sh
 
 Or using Python:
-------------------------------------
+----------------
+
 	python compute_leadfields.py
 
 
@@ -63,7 +76,8 @@ The files used during the BEM computation are stored in the "tmp" folder.
 
 See sample_output.txt to see what the scripts output should look like.
 
-On a recent workstation the computation takes about 
+On a recent workstation the computation takes about:
+
    	    744.66 s    344.12 s  390.41 s om_assemble -HM
 	 +  431.74 s	188.5 s   246.5 s  om_inverser
 	 +  2689.71	    545.1 s	  719.13 s om_assemble -DSM
@@ -78,38 +92,42 @@ On a recent workstation the computation takes about
 
 II) Compute and apply a corticial mapping, TDCS
 -----------------------------------------------
--canonical is a model generated remeshing the MNI template from SPM. It uses conductivities, 1., 0.0125, 1. and has a few defined source terms (8) with intensities roughly at the same scale as the model. 128 electrodes.
--canonical_real is the same model with real potentials and sensors (64) locations.
+
+- *canonical* is a model generated remeshing the MNI template from SPM. It uses conductivities, 1., 0.0125, 1. and has a few defined source terms (8) with intensities roughly at the same scale as the model. 128 electrodes.
+
+- *canonical_real* is the same model with real potentials and sensors (64) locations.
 
 commands:
 ---------
-for cortical mapping:
-> python corticalmapping.py canonical_real
+For cortical mapping:
 
-for TDCS:
-> python tdcs.py canonical
+	$ python corticalmapping.py canonical_real
 
--------------------------------------------------------------------------
+For TDCS:
 
-
-###########################################
-# CAVEAT on using OpenMEEG from python !!
-# Beware that a temporary object has its memory
-# released. So do not work with data provided from
-# an OpenMEEG temporary object.
-# For example, having a symmetric matrix defined as :
-# > M = om.SymMatrix(100)
-# taking as an numpy array the sub-matrix of M might lead to corrupted memory:
-# > mySubMat = om.asarray(M.submat(0,10,0,10))
-# since submat returns a newly created object that is hold by nothing, thus
-# destroyed afterward.
-# Instead do keep an object pointing the newly created submatrix, and then
-# access the numpy array form of it:
-# > subM = M.submat(0,10,0,10)
-# > mySubMat = om.asarray(subM)
-###########################################
+	$ python tdcs.py canonical
 
 
+!!! CAVEAT on using OpenMEEG from Python !!!
+=============================================
+
+Beware that a temporary object has its memory released. So do not work with data provided from an OpenMEEG temporary object.
+
+For example, having a symmetric matrix defined as:
+
+	>>> M = om.SymMatrix(100)
+
+Taking as a numpy array the sub-matrix of M might lead to corrupted memory:
+
+	>>> mySubMat = om.asarray(M.submat(0,10,0,10))
+
+since submat returns a newly created object that is hold by nothing, thus destroyed afterward.
+
+Instead do keep an object pointing the newly created submatrix, and then
+access the numpy array form of it:
+
+	>>> subM = M.submat(0,10,0,10)
+	>>> mySubMat = om.asarray(subM)
 
 If you meet some difficulties running this example please contact:
 
