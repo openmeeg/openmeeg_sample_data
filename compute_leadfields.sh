@@ -35,34 +35,34 @@ mkdir -p tmp
 mkdir -p leadfields
 
 # Compute EEG gain matrix
-om_assemble -HM ${GEOMETRY} ${CONDUCTIVITIES} ${HM}
-om_minverser ${HM} ${HMINV}
-om_assemble -DSM ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${DSM}
-om_assemble -H2EM ${GEOMETRY} ${CONDUCTIVITIES} ${EEG_ELECTRODES} ${H2EM}
-om_gain -EEG ${HMINV} ${DSM} ${H2EM} ${EEG_LEADFIELD}
+time om_assemble -HM ${GEOMETRY} ${CONDUCTIVITIES} ${HM}
+time om_minverser ${HM} ${HMINV}
+time om_assemble -DSM ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${DSM}
+time om_assemble -H2EM ${GEOMETRY} ${CONDUCTIVITIES} ${EEG_ELECTRODES} ${H2EM}
+time om_gain -EEG ${HMINV} ${DSM} ${H2EM} ${EEG_LEADFIELD}
 # or with the adjoint
-#om_gain -EEGadjoint ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${HM} ${H2EM} ${EEG_LEADFIELD_ADJOINT}
+#time om_gain -EEGadjoint ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${HM} ${H2EM} ${EEG_LEADFIELD_ADJOINT}
 
 # Compute ECoG gain matrix
-om_assemble -H2ECOGM ${GEOMETRY} ${CONDUCTIVITIES} ${ECOG_ELECTRODES} "Cortex" ${H2ECOGM}
-om_gain -EEG ${HMINV} ${DSM} ${H2ECOGM} ${ECOG_LEADFIELD}
+time om_assemble -H2ECOGM ${GEOMETRY} ${CONDUCTIVITIES} ${ECOG_ELECTRODES} "Cortex" ${H2ECOGM}
+time om_gain -EEG ${HMINV} ${DSM} ${H2ECOGM} ${ECOG_LEADFIELD}
 
 # Compute MEG gain matrix
-om_assemble -H2MM ${GEOMETRY} ${CONDUCTIVITIES} ${SQUIDS} ${H2MM}
-om_assemble -DS2MM ${DIPOLES} ${SQUIDS} ${DS2MEG}
-om_gain -MEG ${HMINV} ${DSM} ${H2MM} ${DS2MEG} ${MEG_LEADFIELD}
+time om_assemble -H2MM ${GEOMETRY} ${CONDUCTIVITIES} ${SQUIDS} ${H2MM}
+time om_assemble -DS2MM ${DIPOLES} ${SQUIDS} ${DS2MEG}
+time om_gain -MEG ${HMINV} ${DSM} ${H2MM} ${DS2MEG} ${MEG_LEADFIELD}
 # or with the adjoint
-om_gain -MEGadjoint ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${HM} ${H2MM} ${DS2MEG} ${MEG_LEADFIELD_ADJOINT}
+time om_gain -MEGadjoint ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${HM} ${H2MM} ${DS2MEG} ${MEG_LEADFIELD_ADJOINT}
 
 # Compute EIT gain matrix
-om_assemble -EITSM ${GEOMETRY} ${CONDUCTIVITIES} ${EIT_ELECTRODES} ${EITSM}
-om_gain -EEG ${HMINV} ${EITSM} ${H2EM} ${EIT_LEADFIELD}
+time om_assemble -EITSM ${GEOMETRY} ${CONDUCTIVITIES} ${EIT_ELECTRODES} ${EITSM}
+time om_gain -EEG ${HMINV} ${EITSM} ${H2EM} ${EIT_LEADFIELD}
 
 # Compute Internal Potential ....
-om_assemble -H2IPM ${GEOMETRY} ${CONDUCTIVITIES} ${INTERNAL_ELECTRODES} ${IPHM}
+time om_assemble -H2IPM ${GEOMETRY} ${CONDUCTIVITIES} ${INTERNAL_ELECTRODES} ${IPHM}
 # ...for internal dipoles
-om_assemble -DS2IPM ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${INTERNAL_ELECTRODES} ${IPSM}
-om_gain -IP ${HMINV} ${DSM} ${IPHM} ${IPSM} ${IP_LEADFIELD}
+time om_assemble -DS2IPM ${GEOMETRY} ${CONDUCTIVITIES} ${DIPOLES} ${INTERNAL_ELECTRODES} ${IPSM}
+time om_gain -IP ${HMINV} ${DSM} ${IPHM} ${IPSM} ${IP_LEADFIELD}
 # ...for boundary-injected current
-om_gain -EITIP ${HMINV} ${EITSM} ${IPHM} ${EITIP_LEADFIELD}
+time om_gain -EITIP ${HMINV} ${EITSM} ${IPHM} ${EITIP_LEADFIELD}
 
