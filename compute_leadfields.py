@@ -31,13 +31,13 @@ geom = om.Geometry(geom_file, cond_file)
 
 dipoles = om.Matrix(dipoles_file)
 
-meg_sensors = om.Sensors(squids_file)
+meg_sensors = om.MEGSensors(squids_file)
 
-eeg_electrodes = om.Sensors(eeg_electrodes_file)
+eeg_electrodes = om.EEGSensors(eeg_electrodes_file)
 
-eit_electrodes = om.Sensors(eit_electrodes_file, geom)
+eit_electrodes = om.EITSensors(eit_electrodes_file, geom)
 
-ecog_electrodes = om.Sensors(ecog_electrodes_file)
+ecog_electrodes = om.ECoGSensors(ecog_electrodes_file)
 
 int_electrodes = om.Matrix(internal_electrodes_file)
 

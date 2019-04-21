@@ -22,14 +22,14 @@ def load_headmodel(name, prefix='data'):
     pot_file = op.join(prefix, name, name + '.pot')
     geom = om.Geometry()
     geom.read(str(geom_file), str(cond_file))
-    sensors = om.Sensors()
+    sensors = om.EEGSensors()
     sensors.load(str(patches_file))
     model = {'geometry': geom, 'sensors': sensors}
     if op.exists(dip_file):
         dipoles = om.Matrix(str(dip_file))
         model['dipsources'] = dipoles
     if op.exists(tdcs_file):
-        tdcs = om.Sensors(str(tdcs_file), geom)
+        tdcs = om.EITSensors(str(tdcs_file), geom)
         model['tdcssources'] = tdcs
     if op.exists(pot_file):
         pot = om.Matrix(str(pot_file))
