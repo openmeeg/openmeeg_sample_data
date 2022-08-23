@@ -8,11 +8,9 @@
 - Internal Potential for dipolar source
 - Internal Potential for boundary injected current
 """
-
-from __future__ import print_function
+import os.path as op
 
 import openmeeg as om
-from os import path as op
 
 print(__doc__)
 
