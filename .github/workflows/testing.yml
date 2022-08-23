@@ -32,9 +32,7 @@ jobs:
         flake8 .
     - name: Test Python
       run: |
-        echo ${PWD}
-        ls -laR
-        python ../compute_leadfields.py
+        python compute_leadfields.py
     - name: Test UNIX binaries
       if: ${{ matrix.os }} == "ubuntu-latest"
       run: |
