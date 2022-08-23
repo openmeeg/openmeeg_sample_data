@@ -16,14 +16,13 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
+    - uses: conda-incubator/setup-miniconda@v2
       with:
-        python-version: "3.10"
+        auto-activate-base: true
+        python-version: ["3.10"]
     - name: Install dependencies
       run: |
-        pip install openmeeg flake8
+        conda install openmeeg flake8 -c conda-forge
     - name: Lint with flake8
       run: |
         flake8 .
