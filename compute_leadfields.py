@@ -51,15 +51,13 @@ if not op.exists("leadfields"):
     os.mkdir('leadfields')
 
 # Compute Leadfields
-gauss_order = 3
-use_adaptive_integration = True
 dipole_in_cortex = True
 
 if op.exists("tmp/hmi.mat"):
     hminv = om.SymMatrix("tmp/hmi.mat")
     print("HM inverse loaded from ", "tmp/hmi.mat")
 else:
-    hm = om.HeadMat(geom, gauss_order)
+    hm = om.HeadMat(geom)
     hm.invert()
     hm.save("tmp/hmi.mat")
     hminv = hm
@@ -71,8 +69,7 @@ if op.exists("tmp/dsm.mat"):
     dsm = om.Matrix("tmp/dsm.mat")
     print("DSM loaded from ", "tmp/dsm.mat")
 else:
-    dsm = om.DipSourceMat(geom, dipoles, gauss_order,
-                          use_adaptive_integration, "Brain")
+    dsm = om.DipSourceMat(geom, dipoles)
     dsm.save("tmp/dsm.mat")
 
 # For EEG
@@ -86,7 +83,7 @@ ds2mm = om.DipSource2MEGMat(dipoles, meg_sensors)
 h2mm = om.Head2MEGMat(geom, meg_sensors)
 
 # For EIT
-eitsm = om.EITSourceMat(geom, eit_electrodes, gauss_order)
+eitsm = om.EITSourceMat(geom, eit_electrodes)
 
 # For Internal Potential
 iphm = om.Surf2VolMat(geom, int_electrodes)
