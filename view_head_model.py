@@ -6,7 +6,7 @@ from mesh import Mesh
 import numpy as np
 from mayavi import mlab
 
-print __doc__
+print(__doc__)
 
 # define some nice colors for the surfaces
 head_col = (0.95, 0.83, 0.83)    # light pink
