@@ -40,7 +40,6 @@ jobs:
         ./compute_leadfields.sh
     - name: Test Windows binaries
       if: startsWith(matrix.os, 'windows')
-      shell: cmd
       run: |
         om_minverser --version
-        compute_leadfields.bat
+        ./compute_leadfields.bat
