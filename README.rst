@@ -1,9 +1,9 @@
 .. -*- mode: rst -*-
 
-|Travis|_
+|GitHub Actions|_
 
-.. |Travis| image:: https://api.travis-ci.org/openmeeg/openmeeg_sample_data.svg?branch=master
-.. _Travis: https://travis-ci.org/openmeeg/openmeeg_sample_data
+.. |GitHub Actions| image:: https://github.com/openmeeg/openmeeg_sample_data/actions/workflows/testing.yml/badge.svg
+.. _Github Actions: https://github.com/openmeeg/openmeeg_sample_data/actions/workflows/testing.yml
 
 CAVEAT on using the python wrapper (see bottom)
 
