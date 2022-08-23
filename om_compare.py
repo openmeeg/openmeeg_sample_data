@@ -4,7 +4,6 @@ Created on Wed Dec 11 2013.
 @author: - E. Olivi
 """
 
-from __future__ import print_function
 import vtk
 from vtk.util.numpy_support import vtk_to_numpy
 from numpy import linalg as la
@@ -21,8 +20,7 @@ def rdmmag(X1, X2):
 
 
 def compare_vtp(f1, f2):
-    """
-    Compute errors.
+    """Compute errors.
 
     This function computes the rdm and (relative)mag errors of VTK::vtp files
     generated with OpenMEEG.
@@ -47,11 +45,11 @@ def compare_vtp(f1, f2):
     # determine number of sources
     nb_sources = poly1.GetPointData().GetNumberOfArrays() - 1
     # ensure it is the same geometry
-    assert(poly1.GetNumberOfPoints() == poly2.GetNumberOfPoints())
-    assert(poly1.GetNumberOfCells() == poly2.GetNumberOfCells())
+    assert poly1.GetNumberOfPoints() == poly2.GetNumberOfPoints()
+    assert poly1.GetNumberOfCells() == poly2.GetNumberOfCells()
     # Get the mesh names
     cell_labels = poly1.GetCellData().GetAbstractArray(0)
-    assert(cell_labels.GetName() == 'Names')
+    assert cell_labels.GetName() == 'Names'
     s = set()
     nb_meshes = 0
     cell_ids = list()
