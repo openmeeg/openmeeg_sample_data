@@ -42,4 +42,5 @@ jobs:
       if: startsWith(matrix.os, 'windows')
       shell: cmd
       run: |
+        om_minverser --version
         compute_leadfields.bat
