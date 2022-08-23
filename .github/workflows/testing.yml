@@ -35,7 +35,9 @@ jobs:
     - name: Test UNIX binaries
       if: ${{ matrix.os }} == "ubuntu-latest"
       run: |
-        ./compute_leadfields.sh
+        echo ${PWD}
+        ls -laR
+        ../compute_leadfields.sh
     - name: Test Windows binaries
       if: ${{ matrix.os }} == "windows-latest"
       shell: cmd
