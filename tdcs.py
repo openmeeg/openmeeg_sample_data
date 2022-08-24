@@ -66,8 +66,9 @@ def main(argv):
             # get the triangles supporting this sensor
             tris = model['tdcssources'].getInjectionTriangles(s)
             for it in tris:
-                Xt[it.getindex(), :] = (currents[s, :] *
-                                        model['tdcssources'].getWeights()(s))
+                Xt[it.getindex(), :] = (
+                    currents[s, :] * model['tdcssources'].getWeights()(s)
+                )
 
         X = om.fromarray(Xt)
         model['geometry'].write_vtp(filename, X)
